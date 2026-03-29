@@ -1,38 +1,139 @@
-.App {
-  text-align: center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+    background-image: url(/src/img/sfondo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
 }
 
-.App-link {
-  color: #61dafb;
+.form-seriale {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.2),
+            rgba(255, 255, 255, 0.1));
+
+    padding: 10px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 30px;
+    text-align: center;
+}
+
+.select {
+    appearance: none;
+    width: calc(50% - 10px);
+    text-align: center;
+}
+
+.input-apparato {
+    width: calc(80% - 10px);
+}
+
+.salva-apparato {
+    width: calc(20% - 10px);
+    text-align: center;
+}
+
+.button-salva-seriale {
+    width: calc(50% - 10px);
+}
+
+.error {
+    width: 100%;
+    color: red;
+}
+
+button:active {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.8),
+            rgba(255, 255, 255, 0.4));
+}
+
+.card-seriali {
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.seriale {
+    width: 100%;
+}
+
+.flex.seriale {
+    justify-content: space-between;
+}
+
+.w50 {
+    width: calc(50% - 10px);
+}
+
+.w100 {
+    width: 100%;
+}
+
+.delete {
+    background: linear-gradient(10deg,
+            rgba(255, 0, 0, 0.5),
+            rgba(255, 0, 0, 0.1));
+}
+
+.delete:active {
+    background: linear-gradient(135deg,
+            rgba(255, 0, 0, 0.8),
+            rgba(255, 0, 0, 0.4));
+}
+
+.put {
+    background: linear-gradient(10deg,
+            rgba(242, 255, 0, 0.5),
+            rgba(242, 255, 0, 0.1));
+}
+
+.put:active {
+    background: linear-gradient(135deg,
+            rgba(242, 255, 0, 0.8),
+            rgba(242, 255, 0, 0.4));
+}
+
+.mt {
+    margin-top: 10px;
+}
+
+.card.nav {
+    width: 200px;
+    flex: 0 0 auto;
+}
+
+.flex.nav-btn {
+    overflow-x: scroll;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
 }
