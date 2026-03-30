@@ -29,61 +29,63 @@ function App() {
 
   return (
     <>
-      <div className="container">
-        <div className="flex card nav-btn">
-          <button className='card nav' onClick={() => setPage("seriale")}>ADD SERIALE</button>
-          <button className='card nav' onClick={() => setPage("nome-apparato")}>ADD NOME APPARATO</button>
-          <button className='card nav' onClick={() => setPage("")}>LISTA NOME APPARATI</button>
+      <div className="app">
+        <div className="container">
+          <div className="flex card nav-btn">
+            <button className='card nav' onClick={() => setPage("seriale")}>ADD SERIALE</button>
+            <button className='card nav' onClick={() => setPage("nome-apparato")}>ADD NOME APPARATO</button>
+            <button className='card nav' onClick={() => setPage("")}>LISTA NOME APPARATI</button>
+          </div>
+          <div className="mt">
+            {page === "seriale" ? (
+              <CreaSeriale />
+            ) : (
+              <CreaNomeApparato />
+            )}
+          </div>
         </div>
-        <div className="mt">
-          {page === "seriale" ? (
-            <CreaSeriale />
+        <div className="container">
+          {seriali.length === 0 ? (
+            <p>SERIALI NON TROVATI</p>
           ) : (
-            <CreaNomeApparato />
+            <div className="card card-seriali">
+              <div className="flex">
+                {seriali.map((serialeTrovato) => (
+                  <div key={serialeTrovato.id} className="card flex w100">
+                    <p className='card w50'>{serialeTrovato.nomeApparatoId}</p>
+                    <p className='card w50'>{serialeTrovato.stato.toUpperCase()}</p>
+                    <p className='card w100'>{serialeTrovato.seriale}</p>
+
+                    <div className="flex seriale w100">
+                      <button
+                        className='card w50 delete'
+                        onClick={() => deleteSeriale(serialeTrovato.id)}
+                      >
+                        DELETE
+                      </button>
+
+                      {serialeTrovato.stato === "assegnato" ? (
+                        <button
+                          className='card put w50'
+                          onClick={() => modidicaPut(serialeTrovato.id, "disponibile")}
+                        >
+                          SET DISPONIBILE
+                        </button>
+                      ) : (
+                        <button
+                          className='card put w50'
+                          onClick={() => modidicaPut(serialeTrovato.id, "assegnato")}
+                        >
+                          ASSEGNA
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           )}
         </div>
-      </div>
-      <div className="container">
-        {seriali.length === 0 ? (
-          <p>SERIALI NON TROVATI</p>
-        ) : (
-          <div className="card card-seriali">
-            <div className="flex">
-              {seriali.map((serialeTrovato) => (
-                <div key={serialeTrovato.id} className="card flex w100">
-                  <p className='card w50'>{serialeTrovato.nomeApparatoId}</p>
-                  <p className='card w50'>{serialeTrovato.stato.toUpperCase()}</p>
-                  <p className='card w100'>{serialeTrovato.seriale}</p>
-
-                  <div className="flex seriale w100">
-                    <button
-                      className='card w50 delete'
-                      onClick={() => deleteSeriale(serialeTrovato.id)}
-                    >
-                      DELETE
-                    </button>
-
-                    {serialeTrovato.stato === "assegnato" ? (
-                      <button
-                        className='card put w50'
-                        onClick={() => modidicaPut(serialeTrovato.id, "disponibile")}
-                      >
-                        SET DISPONIBILE
-                      </button>
-                    ) : (
-                      <button
-                        className='card put w50'
-                        onClick={() => modidicaPut(serialeTrovato.id, "assegnato")}
-                      >
-                        ASSEGNA
-                      </button>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </>
   );
