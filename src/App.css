@@ -12,16 +12,8 @@ body,
     min-height: 100%;
 }
 
-html,
 body {
     background: #6d5a8f;
-}
-
-body {
-    background-image: url(/src/img/sfondo.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
 }
 
 .app {
@@ -29,7 +21,7 @@ body {
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
     box-sizing: border-box;
-    background-image: url('/img/sfondo.jpg');
+    background-image: url('/public/img/sfondo.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
