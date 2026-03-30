@@ -159,3 +159,8 @@ button:active {
     flex-wrap: nowrap;
     scrollbar-width: none;
 }
+
+.search {
+    margin-bottom: 20px;
+    width: calc(50% - 10px);
+}

@@ -4,20 +4,47 @@ import CreaNomeApparato from './components/CreaNomeApparato';
 import CreaSeriale from './components/CreaSeriale';
 import { eliminaSeriale, findAllSeriali } from './repository/SerialiRepo';
 import { modSeriale } from './service/SerialeService';
+import { findApparatiById } from './repository/NomeApparatoRepo';
 
 function App() {
 
   const [seriali, setSeriali] = useState([]);
+  const [serialiTrovati, setSerialiTrovati] = useState([]);
+  const [search, setSearch] = useState("");
+
   const [page, setPage] = useState("");
 
   useEffect(() => {
     async function caricaSeriali() {
       const cercaSeriali = await findAllSeriali();
 
-      setSeriali(cercaSeriali)
+      const serialiConNome = await Promise.all(
+        cercaSeriali.map(async (s) => {
+          const apparato = await findApparatiById(s.nomeApparatoId);
+
+          return {
+            ...s,
+            nomeApparato: apparato.nome
+          };
+        })
+      );
+      setSeriali(serialiConNome);
+      setSerialiTrovati(serialiConNome);
     }
+
     caricaSeriali();
-  }, [seriali])
+  }, [seriali]);
+
+  useEffect(() => {
+    if (search === "") {
+      setSerialiTrovati(seriali);
+    } else {
+      const cerca = seriali.filter(s =>
+        s.seriale.toLowerCase().includes(search.toLowerCase())
+      );
+      setSerialiTrovati(cerca);
+    }
+  }, [search, seriali]);
 
   async function modidicaPut(id, stato) {
     await modSeriale(id, stato);
@@ -45,14 +72,15 @@ function App() {
           </div>
         </div>
         <div className="container">
-          {seriali.length === 0 ? (
-            <p>SERIALI NON TROVATI</p>
+          <input onChange={(e) => setSearch(e.currentTarget.value)} type="search" className='card search' placeholder='SEARCH' />
+          {serialiTrovati.length === 0 ? (
+            <p>SERIALE NON TROVATO</p>
           ) : (
             <div className="card card-seriali">
               <div className="flex">
-                {seriali.map((serialeTrovato) => (
+                {serialiTrovati.map((serialeTrovato) => (
                   <div key={serialeTrovato.id} className="card flex w100">
-                    <p className='card w50'>{serialeTrovato.nomeApparatoId}</p>
+                    <p className='card w50'>{serialeTrovato.nomeApparato.toUpperCase()}</p>
                     <p className='card w50'>{serialeTrovato.stato.toUpperCase()}</p>
                     <p className='card w100'>{serialeTrovato.seriale}</p>
 
