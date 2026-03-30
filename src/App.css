@@ -5,6 +5,13 @@
     color: black;
 }
 
+html,
+body,
+#root {
+    width: 100%;
+    min-height: 100%;
+}
+
 body {
     background-image: url(/src/img/sfondo.jpg);
     background-repeat: no-repeat;
